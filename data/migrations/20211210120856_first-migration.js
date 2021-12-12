@@ -1,6 +1,6 @@
 exports.up = (knex) => { 
     return knex.schema 
-    .createTable('profiles', function (table) { 
+    .createTable('profiles', table =>  { 
         table.increments('profile_id'); 
         table.string('name', 128).notNullable(); 
     }); 

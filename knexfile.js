@@ -1,50 +1,7 @@
-/* Update with your config settings.
 
-module.exports = {
-
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './dev.sqlite3'
-    }
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
-
-};*/
 
 /* allow the code to access our .env file to get our environment variables. */
-require('dotenv').config() 
+require('dotenv').config({ path: '.env' }) 
 /* imports our pg library into the code */ 
 const pg = require('pg'); 
 /* This is standard and required by the production database. We will set it up later. */ 
@@ -57,7 +14,15 @@ seeds: {directory: './data/seeds'}, }
 /* sets the connection configuration settings for the development and production environment. */ 
 module.exports = { development: 
   { ...sharedConfig, 
-    connection: { host: process.env.DB_HOST, user: process.env.DB_USER, password: process.env.DB_PASS, database: process.env.DB_NAME } }, 
-    production: { ...sharedConfig, connection: process.env.DATABASE_URL, 
+    
+    connection: { host: 
+      process.env.DB_HOST, 
+      user: process.env.DB_USER, 
+      password: process.env.DB_PASS, 
+      database: process.env.DB_NAME } }, 
+    
+      production: { ...sharedConfig, 
+      connection: process.env.DATABASE_URL, 
     pool: { min: 2, max: 10 }, }, 
   };
+
